@@ -25,7 +25,7 @@ Avalonia 是一个类似现代 WPF 的 UI，适用于所有操作系统：Window
 * [FluentAvalonia](https://github.com/amwx/FluentAvalonia) - 提供更优秀的 UI  
 * [AwesomeAvalonia](https://github.com/AvaloniaCommunity/awesome-avalonia) - 第三方工具列表  
 
-文档编写得非常出色。花时间阅读各个部分。它与 WPF 非常相似，但有一些差异是很大的改进。将 WPF 转换为 Avalonia 比反过来要容易得多。对于未记录的类，您通常可以参考 WPF 和 UWP 文档，它们会非常相似。
+Avalonia官方文档编写得非常出色。你应该花时间阅读各个部分。它与 WPF 非常相似，但有一些差异很大的改进。将 WPF 转换为 Avalonia 要比反过来容易得多。对于未记录的类，您通常可以参考 WPF 和 UWP 文档，它们会非常相似。
 
 如需更多帮助：
 
