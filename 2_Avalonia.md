@@ -121,7 +121,7 @@ d:DataContext="{x:Static local:ViewModelLocator.Main}"
 
 确保你在 `csproj` 中针对正确的框架，启用了 Nullable，并使用了最新的语言特性。
 
-```
+```xaml
 <TargetFramework>net7.0</TargetFramework>
 <Nullable>enable</Nullable>
 <LangVersion>default</LangVersion>
@@ -132,7 +132,7 @@ d:DataContext="{x:Static local:ViewModelLocator.Main}"
 
 同时确保创建一个包含您常用命名空间的文件 `Usings.cs` 。
 
-```
+```csharp
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;
@@ -149,7 +149,7 @@ global using static System.FormattableString;
 
 此外，我发现使用设计器时，初始化 MainView 和应用程序是没有意义的；你可以跳过应用程序初始化，预览会显示得更快。
 
-```
+```csharp
 public override async void OnFrameworkInitializationCompleted()
 {
 #if DEBUG
