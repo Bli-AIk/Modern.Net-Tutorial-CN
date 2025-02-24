@@ -1,18 +1,18 @@
 教程：使用 .NET 构建现代跨平台应用
 ====================
 
-[1\. 引言](README.md)
-[2\. Avalonia UI](2_Avalonia.md)
-[3\. 依赖注入](3_DependencyInjection.md)
-[4\. MVVM 设计](4_MVVM.md)
-[5\. 对话框与工具](5_DialogsTools.md)
-[6\. 单元测试](6_UnitTesting.md)
-[7\. 反应式](7_Reactive.md)
-[8\. 部署](8_Deployment.md)
-[9\. 组装修剪](9_AssemblyTrimming.md)
-[10\. 多环境](10_MultipleEnvironments.md)
+[1. 引言](README.md)
+[2. Avalonia UI](2_Avalonia.md)
+[3. 依赖注入](3_DependencyInjection.md)
+[4. MVVM 设计](4_MVVM.md)
+[5. 对话框与工具](5_DialogsTools.md)
+[6. 单元测试](6_UnitTesting.md)
+[7. 反应式](7_Reactive.md)
+[8. 部署](8_Deployment.md)
+[9. 组装修剪](9_AssemblyTrimming.md)
+[10. 多环境](10_MultipleEnvironments.md)
 
-2\. Avalonia UI
+2. Avalonia UI
 ---------------
 
 Avalonia 是一个类似现代 WPF 的 UI，适用于所有操作系统：Windows、Linux、MacOS、iOS、Android 甚至 Web Assembly！它已经足够成熟，可用于商业用途。
