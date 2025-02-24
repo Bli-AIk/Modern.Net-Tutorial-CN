@@ -121,22 +121,25 @@ d:DataContext="{x:Static local:ViewModelLocator.Main}"
 
 确保你在 `csproj` 中针对正确的框架，启用了 Nullable，并使用了最新的语言特性。
 
+```
 <TargetFramework>net7.0</TargetFramework>
 <Nullable>enable</Nullable>
 <LangVersion>default</LangVersion>
+```
 
 
 对于代码风格，如果你想使用最推荐的编码实践，可以安全地从.NET Roslyn 编译器项目中获取 `.editorconfig` 文件。将其放置在解决方案文件夹中，以便所有项目均可使用。
 
 同时确保创建一个包含您常用命名空间的文件 `Usings.cs` 。
 
+```
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;
 global using System.Threading.Tasks;
 global using RxCommandUnit = ReactiveUI.ReactiveCommand<System.Reactive.Unit, System.Reactive.Unit>;
 global using static System.FormattableString;
-
+```
 
 ### App.xaml.cs
 
@@ -146,6 +149,7 @@ global using static System.FormattableString;
 
 此外，我发现使用设计器时，初始化 MainView 和应用程序是没有意义的；你可以跳过应用程序初始化，预览会显示得更快。
 
+```
 public override async void OnFrameworkInitializationCompleted()
 {
 #if DEBUG
@@ -159,6 +163,7 @@ base.OnFrameworkInitializationCompleted();
 return;
 }
 #endif
+```
 
 
 [\> 下一步：依赖注入](3_DependencyInjection.md)
