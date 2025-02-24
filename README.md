@@ -1,62 +1,70 @@
-# Tutorial: Build Modern Cross-Platform Apps with .NET
+本仓库为源仓库的汉化fork。使用了 ChatGPT 协助翻译，仅供参考。
 
-[1. Introduction](README.md)  
+翻译内容可能包含误差或不准确之处，请结合原文自行斟酌使用。
+
+若涉及版权问题，请联系原作者或版权所有方。
+
+# 教程：使用 .NET 构建现代跨平台应用
+
+[1. 引言](README.md)  
 [2. Avalonia UI](2_Avalonia.md)  
-[3. Dependency Injection](3_DependencyInjection.md)  
-[4. MVVM Design](4_MVVM.md)  
-[5. Dialogs and Tools](5_DialogsTools.md)  
-[6. Unit Testing](6_UnitTesting.md)  
-[7. Reactive](7_Reactive.md)  
-[8. Deployment](8_Deployment.md)  
-[9. Assembly Trimming](9_AssemblyTrimming.md)  
-[10. Multiple Environments](10_MultipleEnvironments.md)
+[3. 依赖注入](3_DependencyInjection.md)  
+[4. MVVM 设计](4_MVVM.md)  
+[5. 对话框与工具](5_DialogsTools.md)  
+[6. 单元测试](6_UnitTesting.md)  
+[7. 响应式编程](7_Reactive.md)  
+[8. 应用部署](8_Deployment.md)  
+[9. 程序集裁剪](9_AssemblyTrimming.md)  
+[10. 多环境支持](10_MultipleEnvironments.md)  
 
-## 1. Introduction
+## 1. 引言
 
-by Etienne Charland
+**作者：Etienne Charland**  
 
-I started programming in .NET back in the days of .NET 1.0 beta 1. Transitioning from Visual Basic was a big deal, and there was a lot of excitement around .NET! Things have gone a very long way since.
+我最早在 .NET 1.0 Beta 1 时代就开始使用 .NET 进行编程。从 Visual Basic 过渡到 .NET 是一件大事，当时大家对 .NET 充满了期待！如今，.NET 已经走过了漫长的发展历程。
 
-Design patterns have evolved over time. Tools have evolved. I used to program WinForms apps with N-Tier design; which is considered rubbish spaghetti code in today's standards.
+随着时间推移，设计模式不断演进，开发工具也日益完善。以前，我会使用 N-Tier 设计开发 WinForms 应用，而如今，这种设计方式已经被认为是混乱无章的“意大利面条代码”。
 
-The reason I'm writing this tutorial is that although .NET has evolved a lot and is very popular for web development, it is mostly dead when it comes to desktop development, and there's a long learning curve to get the right tools. I've spent a lot of time to upgrade my skills, and I'm hoping that it will help others sharpen their blades!
+我之所以编写这篇教程，是因为尽管 .NET 在 Web 开发领域取得了巨大成功，但在桌面开发领域却几乎销声匿迹，而要找到合适的工具也需要经历漫长的学习曲线。我花费了大量时间提升自己的技能，希望这篇教程能帮助更多开发者磨砺自己的技艺！
 
-### Advantages of .NET
+### .NET 的优势
 
-.NET is really a fantastic programming platform. Some people prefer simple scripting languages that deliver quick results, but I absolutely hate scripting languages. I want to build something clean and solid that will be easy to expand in the future. **Over time, the easy road gets hard, and the long road gets easy.** It may be harder for some simple tasks, but it's easier for complex tasks. I recommend C# because most of the code you'll find online is in C#. If you want fancier, some people really like F#.
+.NET 是一个极为出色的编程平台。有些人喜欢能够快速出成果的简单脚本语言，但我个人非常讨厌脚本语言。我希望构建的是结构清晰、坚实稳固，并且能够轻松扩展的应用。**在软件开发中，捷径终将崎岖，远途反成坦途。**.NET 可能在某些简单任务上稍显繁琐，但在处理复杂任务时，它的优势就会显现。我推荐使用 C#，因为网上的代码示例大多采用 C#，如果你想尝试更高级的语言，有些人对 F# 也颇为推崇。
 
-Some advantages of .NET/C#
-- Highly performant*
-- Cross-platform (Windows, Linux, MacOS, iOS, Android)
-- Can embed the framework to have no dependencies
-- Great community support
-- Intuitive and compact language syntax
-- Same language for desktop or web applications
+.NET/C# 主要有以下优势：
+- **高性能***  
+- **跨平台**（支持 Windows、Linux、MacOS、iOS、Android）  
+- **可以嵌入框架，无需额外依赖**  
+- **拥有强大的社区支持**  
+- **语言语法直观简洁**  
+- **桌面应用和 Web 应用可以使用相同的语言**  
 
-*Note about performance. You can argue that C++ is a lot more performant, and you are absolutely right. Do your low-level processing that requires performance in C++. However, the performance of an overall application more depends on its overall design and structure, and badly-structured code can become performance pits. Nowadays, performance more depends on efficient multi-threading, and any kind of multi-threading in C++ is an absolute mess. Multi-threading in .NET is a breeze (with await/async keywords). .NET allows building high-level applications with a structure that make it very efficient, calling individual components as needed and native C++ libraries when needed. Performance of .NET is a lot better than Python or JAVA.
+*关于性能*：你可能会认为 C++ 具有更高的性能，这一点毋庸置疑。因此，如果某些底层任务对性能要求极高，那么可以用 C++ 进行开发。然而，影响整个应用程序性能的关键因素在于代码的整体架构。如果代码结构混乱，即便是 C++ 也会变成性能瓶颈。如今，应用程序的性能更多取决于高效的多线程处理，而 C++ 的多线程编程异常复杂，而 .NET 提供了 **await/async** 关键字，使多线程编程变得异常简单。.NET 允许开发者构建高层次的应用架构，按需调用独立组件，并在必要时集成原生 C++ 库。与 Python 或 Java 相比，.NET 的性能要优越得多。
 
-### The problem with .NET for Desktop
+### .NET 在桌面开发中的困境
 
-Microsoft released WinForms back in 2002. Then, they released WPF in 2006 which allowed the use of MVVM design pattern to fully separate the logic from the UI. So far so good; except that MONO never considered WPF important enough to support it, and thus WPF has never worked on Linux or MacOS, leaving MONO with archaic WinForms the only cross-platform solution.  In 2015, they released UWP to develop Windows Store apps. You can search for UWP jobs across the USA and you'll find about 1, as a testimony of its success. It comes with tons of limitations and again, works only on Windows. There is UNO that builds on top of UWP that makes it cross-platform, but you get all the limitations of UWP. Microsoft then released WinUI 1, 2 and 3, which have a long list of issues. They are working on MAUI to allow running apps on MacOS, but even there, it will not support Linux. I don't know whether you've learnt all of these platforms -- I personally haven't.
+微软在 2002 年推出了 WinForms，随后在 2006 年发布了 WPF，使得开发者能够采用 MVVM 设计模式，实现 UI 与业务逻辑的完全分离。到这里一切看似都很顺利，但问题在于 MONO（.NET 的跨平台实现）从未对 WPF 给予足够的重视，导致 WPF 不能在 Linux 或 MacOS 上运行，迫使 MONO 只能依赖过时的 WinForms 作为唯一的跨平台桌面 UI 方案。
 
-What I'm trying to say is that the desktop toolkit situation is a complete mess, and that's why most programmers have moved to other alternatives.
+2015 年，微软推出了 UWP（通用 Windows 平台）用于开发 Windows 商店应用。如果你在全美范围内搜索 UWP 相关的招聘岗位，你可能只能找到寥寥无几的职位，这足以说明 UWP 的失败。UWP 充满了各种限制，并且只能运行在 Windows 上。虽然有一个基于 UWP 的 UNO 框架，使其能够跨平台运行，但依然要承受 UWP 本身的诸多限制。随后，微软又陆续推出了 WinUI 1、WinUI 2 和 WinUI 3，但这些方案存在大量问题。微软目前正在开发 MAUI，使 .NET 应用能够运行在 MacOS 上，但即便如此，它仍然不支持 Linux。我不知道你是否了解这些平台 —— 反正我并没有全部学习。
 
-But WAIT! There is one more option: [Avalonia UI](https://avaloniaui.net/). A rewrite of WPF with all the modernizations of UWP and WinUI that works on all platforms: Windows, Linux, MacOS, Android, iOS, and WebAssembly. It is mature enough for commercial use.
+我的意思是，.NET 桌面开发的工具链极度混乱，因此大多数开发者都选择了其他替代方案。
 
-**Although the tools presented here are very powerful, not many people are using this combination of tools because of the sharp learning curve, and the help online is limited. I'm hoping that this tutorial will help grow the community.**
+但等等！其实还有一个选项：[**Avalonia UI**](https://avaloniaui.net/)。这是对 WPF 的完全重写，吸收了 UWP 和 WinUI 的各种现代化改进，并且能够运行在所有主要平台上：Windows、Linux、MacOS、Android、iOS，甚至 WebAssembly。如今，它已经足够成熟，可以用于商业项目。
 
-### My Setup
+**尽管这里介绍的工具非常强大，但由于学习曲线陡峭，使用这些工具的开发者并不多，网上的相关资料也相对有限。我希望这篇教程能帮助更多人了解和使用这些技术，从而壮大社区！**
 
-I got tired of Windows taking ownership of our computer and dumped it ahead of Windows 11's release. I'm using Linux; if you're a programmer, Arch-based is a good option to be cutting-edge. I choose [Garuda Linux](https://garudalinux.org/) and love it (but do NOT install arch-based for your wife and grand-ma!). I got Windows in a VM and rarely use it at all. This forced me to modernize all my apps.
+### 我的开发环境
 
-For programming IDE, Visual Studio works only in Windows, and Visual Studio Code is very limited. I'm using [JetBrains Rider](https://www.jetbrains.com/rider/) which works on Windows, Linux and MacOS. They have free license for students and for open source developpers (as long as you have an active project history). [See their offers here.](https://www.jetbrains.com/rider/buy/#discounts) Even on Windows, you'll get a great productivity boost by switching to JetBrains Rider -- try it and you won't look back. JetBrains Rider has great support for Avalonia.
+在 Windows 11 发布之前，我已经厌倦了 Windows 对用户电脑的种种控制，因此彻底放弃了它。我目前使用 Linux，如果你是开发者，基于 Arch 的 Linux 发行版是一个不错的选择，因为它始终保持最新的软件版本。我个人选择了 [**Garuda Linux**](https://garudalinux.org/)，并且非常喜欢它（但千万不要给你全家老小都装上基于 Arch 的 Linux！）。我在虚拟机里保留了 Windows，但基本上很少使用。这迫使我对自己的所有应用进行了现代化改造。
 
-Basically -- .NET works best if you dump Windows, WPF and Visual Studio.
+至于开发工具，Visual Studio 只能运行在 Windows 上，而 Visual Studio Code 功能有限。因此，我使用的是 [**JetBrains Rider**](https://www.jetbrains.com/rider/)，它支持 Windows、Linux 和 MacOS。JetBrains 为学生和开源开发者提供免费授权（前提是你需要有活跃的项目历史）[点击这里查看详情](https://www.jetbrains.com/rider/buy/#discounts)。即便你在 Windows 上开发，我仍然建议你尝试 JetBrains Rider，你会发现它的生产力远胜 Visual Studio，一旦尝试就再也回不去了。而且，JetBrains Rider 对 Avalonia UI 有着出色的支持。
 
-There are many topics to cover to build modern applications, and I'll cover a good selection of tools and designs. You could read a whole book on each topic, and I'll summarize the essentials with my own experience, with links to learn more.
+总结一下 —— **如果你想更好地使用 .NET，那就抛弃 Windows、WPF 和 Visual Studio。**
 
-I will use the [432hz Batch Converter](https://sourceforge.net/projects/converter432hz/) several times for sample codes. It can be downloaded for Windows, Linux or MacOS.
+构建现代应用涉及许多技术和工具，我会在教程中介绍一系列重要的内容。每个主题你都可以找到专门的书籍深入学习，而我会结合自己的经验，为你总结核心要点，并提供相关学习资源。
 
-You can post your comments in the [Discussions section](https://github.com/mysteryx93/Modern.Net-Tutorial/discussions).
+我将在本教程中多次使用 [**432hz 批量转换器**](https://sourceforge.net/projects/converter432hz/) 作为示例代码。它支持 Windows、Linux 和 MacOS，你可以下载试用。
 
-[> Next: Avalonia UI](2_Avalonia.md)
+如果你有任何问题或想法，可以在 [**讨论区**](https://github.com/mysteryx93/Modern.Net-Tutorial/discussions) 进行交流。
+
+[> 下一章：Avalonia UI](2_Avalonia.md)
