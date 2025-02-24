@@ -117,7 +117,8 @@ d:DataContext="{x:Static local:ViewModelLocator.Main}"
 
 ### 创建您的项目
 
-有两个项目模板可供选择：仅限桌面或跨平台。说明在此处和此处。
+有两个项目模板可供选择：仅限桌面或跨平台。说明在[此处](https://docs.avaloniaui.net/docs/next/get-started/test-drive/create-a-project) 和 [此处](https://docs.avaloniaui.net/docs/next/guides/building-cross-platform-applications/solution-setup).
+
 
 确保你在 `csproj` 中针对正确的框架，启用了 Nullable，并使用了最新的语言特性。
 
