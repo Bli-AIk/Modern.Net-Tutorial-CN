@@ -129,7 +129,7 @@ d:DataContext="{x:Static local:ViewModelLocator.Main}"
 ```
 
 
-对于代码风格，如果你想使用最推荐的编码实践，可以安全地从.NET Roslyn 编译器项目中获取 `.editorconfig` 文件。将其放置在解决方案文件夹中，以便所有项目均可使用。
+对于代码风格，如果你想使用[最推荐的编码实践](https://github.com/dotnet/roslyn/blob/main/.editorconfig)，可以安全地从.NET Roslyn 编译器项目中获取 `.editorconfig` 文件。将其放置在解决方案文件夹中，以便所有项目均可使用。
 
 同时确保创建一个包含您常用命名空间的文件 `Usings.cs` 。
 
