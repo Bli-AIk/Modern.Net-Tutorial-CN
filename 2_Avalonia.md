@@ -1,81 +1,80 @@
-# Tutorial: Build Modern Cross-Platform Apps with .NET
+# 教程：使用 .NET 构建现代跨平台应用
 
-[1. Introduction](README.md)  
+[1. 引言](README.md)  
 [2. Avalonia UI](2_Avalonia.md)  
-[3. Dependency Injection](3_DependencyInjection.md)  
-[4. MVVM Design](4_MVVM.md)  
-[5. Dialogs and Tools](5_DialogsTools.md)  
-[6. Unit Testing](6_UnitTesting.md)  
-[7. Reactive](7_Reactive.md)  
-[8. Deployment](8_Deployment.md)  
-[9. Assembly Trimming](9_AssemblyTrimming.md)  
-[10. Multiple Environments](10_MultipleEnvironments.md)
+[3. 依赖注入](3_DependencyInjection.md)  
+[4. MVVM 设计模式](4_MVVM.md)  
+[5. 对话框与工具](5_DialogsTools.md)  
+[6. 单元测试](6_UnitTesting.md)  
+[7. 响应式编程](7_Reactive.md)  
+[8. 部署](8_Deployment.md)  
+[9. 程序集裁剪](9_AssemblyTrimming.md)  
+[10. 多环境支持](10_MultipleEnvironments.md)  
 
 ## 2. Avalonia UI
 
-Avalonia is a modern WPF-like UI that works on all OS: Windows, Linux, MacOS, iOS, Android and even Web Assembly! It is mature enough for commercial use.
+Avalonia 是一个现代化的 UI 框架，类似于 WPF，支持所有主流操作系统：Windows、Linux、macOS、iOS、Android，甚至 WebAssembly！它已经足够成熟，可以用于商业项目。
 
-First, install the plugin in your IDE. [Instructions here.](https://docs.avaloniaui.net/docs/next/get-started/set-up-an-editor)
+首先，在你的 IDE 中安装 Avalonia 插件。[安装指南](https://docs.avaloniaui.net/docs/next/get-started/set-up-an-editor)
 
-### Resources
+### 资源
 
-- [Main website](https://avaloniaui.net/)
-- [GitHub source code](https://github.com/AvaloniaUI/Avalonia)
-- [Documentation](https://docs.avaloniaui.net/)
-- [FluentAvalonia](https://github.com/amwx/FluentAvalonia) - Better UI
-- [AwesomeAvalonia](https://github.com/AvaloniaCommunity/awesome-avalonia) - List of 3rd party tools
+- [官方网站](https://avaloniaui.net/)  
+- [GitHub 源代码](https://github.com/AvaloniaUI/Avalonia)  
+- [官方文档](https://docs.avaloniaui.net/)  
+- [FluentAvalonia](https://github.com/amwx/FluentAvalonia) - 提供更好的 UI 组件  
+- [AwesomeAvalonia](https://github.com/AvaloniaCommunity/awesome-avalonia) - Avalonia 生态工具合集  
 
-The documentation is very well-written. Take the time to read the various sections. It is very similar to WPF, with some differences that are great improvements. It's a lot easier to translate WPF to Avalonia than the other way around. For undocumented classes, you can often refer to WPF and UWP documentation that will be very similar.
+Avalonia 的官方文档写得非常详细，建议花时间仔细阅读各个部分。它与 WPF 非常相似，但也做出了一些显著改进。将 WPF 代码迁移到 Avalonia 相对容易，而反过来则较为困难。对于官方文档中未涵盖的类，可以参考 WPF 和 UWP 的相关文档，它们在很多方面是相似的。
 
-For more help:
-- [GitHub Avalonia Discussions](https://github.com/AvaloniaUI/Avalonia/discussions)
-- [GitHub Avalonia Issues](https://github.com/AvaloniaUI/Avalonia/issues)
-- [StackOverflow](https://stackoverflow.com/)
-- [Discord DotNetEvolution](https://discord.com/invite/HSuhTyG)
+如需进一步帮助，可参考以下资源：
+- [GitHub Avalonia 讨论区](https://github.com/AvaloniaUI/Avalonia/discussions)  
+- [GitHub Avalonia 问题跟踪](https://github.com/AvaloniaUI/Avalonia/issues)  
+- [StackOverflow](https://stackoverflow.com/)  
+- [Discord DotNetEvolution](https://discord.com/invite/HSuhTyG)  
 
-### XAML
+### XAML 设计
 
-Do not pay attention to the code-behind aspect; that will be covered in the MVVM section. What you need to learn is the XAML language and creating styles and resources. Practice creating some great UIs that do nothing.
+目前暂时不用关注代码绑定部分，这将在 MVVM 章节介绍。你需要先学习 XAML 语言，并掌握如何创建样式和资源。可以先尝试设计一些漂亮的 UI，而不涉及任何逻辑。
 
-One limitation is that you get no visual editor and instead only get a visual preview. This forces you to write all the XAML manually. As I found out, this is a good thing. My WPF code was all built with absolute coordinates and large margins to position the controls. That's not how layouts should be done. `StackPanel` is your best friend for layouts, so use that instead.
+一个限制是，Avalonia 并没有可视化编辑器，只有 XAML 预览功能，因此你需要手写所有 XAML 代码。但这实际上是一个优势。我最初在 WPF 中编写 UI 时，都是通过绝对坐标和大量的 `Margin` 来定位控件，而这并不是正确的做法。布局应更多依赖 `StackPanel`。
 
-Also use `Grid` with rows and columns. Margins should be used only to control spacing between controls, not to position the controls in the window.
+此外，还应使用 `Grid` 来定义行和列。`Margin` 仅用于控制控件之间的间距，而不应该用于确定控件在窗口中的位置。
 
 ```xaml
 <Grid Margin="10,6,10,10" ColumnDefinitions="150,*" RowDefinitions="*,40">
 ```
 
-Rewrite your auto-generated WPF code with StackPanel and grids and you'll get much cleaner code.
+你可以尝试将自动生成的 WPF 代码改写成 `StackPanel` 和 `Grid` 结构，这样会让代码更加清晰。
 
 ### FluentAvalonia
 
-[FluentAvalonia](https://github.com/amwx/FluentAvalonia) provides better styles and more controls, so you may want to use that too. There are no build-in MessageBox in Avalonia, and FluentAvalonia provides that.
+[FluentAvalonia](https://github.com/amwx/FluentAvalonia) 提供了更美观的样式和更多控件，你可能会希望使用它。Avalonia 本身没有内置 `MessageBox`，但 FluentAvalonia 提供了这个功能。
 
-Download their source code and run their sample app to view all the controls in action. The sample application also allows you to browse all style resources and active colors, and is thus a very useful tool.
+你可以下载 FluentAvalonia 的源代码并运行示例应用，以查看所有控件的实际效果。该示例应用还允许你浏览所有的样式资源和当前的颜色方案，因此是一个非常有用的工具。
 
-### Icons
+### 图标处理
 
-[Svg.Skia](https://github.com/wieslawsoltes/Svg.Skia) is an option for SVG icons; but it cannot adapt the icon color dynamically.
+[Svg.Skia](https://github.com/wieslawsoltes/Svg.Skia) 可以用于处理 SVG 图标，但它无法动态调整图标颜色。
 
-FluentAvalonia provides `SymbolIcon` with build-in icons for most of your needs. Download their source code and run their sample app to view them.
+FluentAvalonia 提供了 `SymbolIcon`，其中包含了大多数常见的图标。你可以下载 FluentAvalonia 的源代码并运行示例应用来查看所有可用图标。
 
 ```xaml
 <flu:SymbolIcon Symbol="Add" FontSize="20" />
 ```
 
-If you need icons that are not in SymbolIcon, there is a way to convert SVG to a Path, but that can get complicated, and Path requires you to set a fixed Brush so it won't adapt to the button Forecolor.
+如果 `SymbolIcon` 中没有你需要的图标，可以将 SVG 转换为 `Path`，但这可能较为复杂。此外，`Path` 需要手动指定 `Brush`，因此不会自动适配按钮的前景色。
 
-I find it easier to create a font containing the custom icons.
+我个人更倾向于创建一个包含自定义图标的字体。
 
-[Here's a simple guide on creating an icons font using FontForge.](https://mohammedraji.github.io/posts/The-Definitive-guide-to-create-an-icon-font/)
+[这里有一篇关于使用 FontForge 创建图标字体的简单指南](https://mohammedraji.github.io/posts/The-Definitive-guide-to-create-an-icon-font/)。
 
-My button then looks like this
+我的按钮代码如下：
 ```c#
 <Button Classes="icon" Width="35" Content="I" />
 ```
 
-With `icon` defined as
-
+`icon` 样式定义如下：
 ```xaml
 <Style Selector="Button.icon">
     <Setter Property="FontFamily" Value="avares://Common.Avalonia.App/Styles/Icons.otf#" />
@@ -83,24 +82,26 @@ With `icon` defined as
 </Style>
 ```
 
-### Sample Code
+### 示例代码
 
-[Here are some sample Views created using these principles.](https://github.com/mysteryx93/HanumanInstituteApps/tree/master/Src/App.Converter432Hz/Converter432Hz/Views)
-I've created custom [Styles](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/Apps/Styles/CommonStyles.axaml) and [Resources](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/Apps/Styles/CommonResources.axaml) that are registered in [App.xaml](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/App.Converter432Hz/Converter432Hz/App.axaml).
+[这里有一些基于这些原则创建的示例 View](https://github.com/mysteryx93/HanumanInstituteApps/tree/master/Src/App.Converter432Hz/Converter432Hz/Views)。  
+我创建了一些自定义[样式](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/Apps/Styles/CommonStyles.axaml)和[资源](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/Apps/Styles/CommonResources.axaml)，并在 [App.xaml](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/App.Converter432Hz/Converter432Hz/App.axaml) 中注册它们。
 
-The app then works great with Light and Dark themes that can be set on-the-fly. The styles add a background gradient, changes the style of buttons to look like the FluentAvalonia 'accent' style with 35% opacity, alters the ListBox so that double-click covers the whole item area, and adjusts a few details for my needs.
+应用程序支持动态切换明暗主题。样式中添加了背景渐变，使按钮样式类似 FluentAvalonia 的“强调”风格（不透明度 35%），修改了 `ListBox` 以便双击时整个项都可交互，并调整了一些 UI 细节。
 
-### Visual Debugging
+### 可视化调试
 
-Setting and altering styles can be difficult, as you don't know how controls are internally structured.
+调整样式可能较为困难，因为你无法直接看到控件的内部结构。
 
-First, run your app and press F12 to open the Avalonia DevTools. Put the tools window on the right-side of the screen and your app on the left. Click on the Visual Tree tab, hover over the control that you want to analyze, and press CTRL+SHIFT. It will browse to that element in the visual tree and you can see what attributes are in effect.
+首先，运行应用程序并按 `F12` 打开 Avalonia DevTools。将工具窗口放在屏幕右侧，应用程序界面放在左侧。点击“可视化树”选项卡，鼠标悬停在你想分析的控件上，然后按 `CTRL+SHIFT`，即可在可视化树中定位该元素，并查看其生效的属性。
 
-Also, you can browse the source styles, [Avalonia.Themes.Fluent](https://github.com/AvaloniaUI/Avalonia/tree/master/src/Avalonia.Themes.Fluent) if using the built-in styles, or [FluentAvalonia](https://github.com/amwx/FluentAvalonia/tree/master/src/FluentAvalonia/Styling).
+你还可以浏览源代码：
+- 如果使用内置样式，可以参考 [Avalonia.Themes.Fluent](https://github.com/AvaloniaUI/Avalonia/tree/master/src/Avalonia.Themes.Fluent)
+- 如果使用 FluentAvalonia，可以参考 [FluentAvalonia 样式库](https://github.com/amwx/FluentAvalonia/tree/master/src/FluentAvalonia/Styling)
 
-### Code-Behind
+### 代码绑定
 
-Finally, here's what my code-behind looks like. I want to keep it that way. You might wonder how I achieve a fully-functional app with no code-behind whatsoever. I'll cover that later.
+最终，我的代码绑定方式如下。我希望保持这种风格。你可能会疑惑我是如何做到完全无代码绑定的，稍后会介绍这一点。
 
 ```c#
 public partial class MainView : CommonWindow<MainViewModel>
@@ -109,17 +110,17 @@ public partial class MainView : CommonWindow<MainViewModel>
 }
 ```
 
-In the XAML, 'd' prefix allows setting design-time properties. This allows setting a DataContext for the designer. We'll create the ViewModelLocator class in the next section.
+在 XAML 中，`d` 前缀用于设置设计时属性，例如：
 
 ```xaml
 d:DataContext="{x:Static local:ViewModelLocator.Main}"
 ```
 
-### Create Your Project
+### 创建项目
 
-There are two project templates available: desktop-only or cross-platform. Instructions [here](https://docs.avaloniaui.net/docs/next/get-started/test-drive/create-a-project) and [here](https://docs.avaloniaui.net/docs/next/guides/building-cross-platform-applications/solution-setup).
+Avalonia 提供了桌面专用模板和跨平台模板。[项目创建指南](https://docs.avaloniaui.net/docs/next/get-started/test-drive/create-a-project)
 
-Make sure that you target the right framework, that Nullables are enabled, and that you use the latest language features, by having this in your `csproj`.
+请确保你的 `csproj` 文件中包含以下内容：
 
 ```
 <TargetFramework>net7.0</TargetFramework>
@@ -127,41 +128,4 @@ Make sure that you target the right framework, that Nullables are enabled, and t
 <LangVersion>default</LangVersion>
 ```
 
-For code styles, if you want to use the most recommended coding practices, it is safe to grab the `.editorconfig` file from the .NET Roslyn Compiler project [here](https://github.com/dotnet/roslyn/blob/main/.editorconfig). Place it in your solution folder to be available for all projects.
-
-Also make sure to create a file `Usings.cs` that contains namespaces that you commonly use.
-
-```c#
-global using System;
-global using System.Collections;
-global using System.Collections.Generic;
-global using System.Threading.Tasks;
-global using RxCommandUnit = ReactiveUI.ReactiveCommand<System.Reactive.Unit, System.Reactive.Unit>;
-global using static System.FormattableString; 
-```
-
-### App.xaml.cs
-
-Put this in `App.xaml.cs`
-
-As of writing this, there's a bug where XAML namespaces of custom libraries do not get recognized by the designer. You must use `GC.KeepAlive` on any class within such libraries to solve this.
-
-Also, I found out that when using the designer, there is no point in initializing your MainView and application; you can skip app initialization and the preview will show faster.
-
-```c#
-public override async void OnFrameworkInitializationCompleted()
-{
-#if DEBUG
-    // Required by Avalonia XAML editor to recognize custom XAML namespaces. Until they fix the problem.
-    GC.KeepAlive(typeof(SvgImage));
-    GC.KeepAlive(typeof(EventTriggerBehavior));
-
-    if (Design.IsDesignMode)
-    {
-        base.OnFrameworkInitializationCompleted();
-        return;
-    }
-#endif
-```
-
-[> Next: Dependency Injection](3_DependencyInjection.md)
+[> 下一章：依赖注入](3_DependencyInjection.md)
