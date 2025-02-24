@@ -4,6 +4,8 @@
 
 若涉及版权问题，请联系原作者或版权所有方。
 
+[原文](https://github.com/mysteryx93/Modern.Net-Tutorial/blob/main/README.md)
+
 # 教程：使用 .NET 构建现代跨平台应用
 
 [1. 引言](README.md)  
