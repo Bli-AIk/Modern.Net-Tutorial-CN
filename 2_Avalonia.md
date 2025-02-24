@@ -30,85 +30,90 @@ Avalonia官方文档编写得非常出色。你应该花时间阅读各个部分
 如需更多帮助：
 
 *   [GitHub Avalonia 讨论](https://github.com/AvaloniaUI/Avalonia/discussions)
-*   [GitHub Avalonia Issues](https://github.com/AvaloniaUI/Avalonia/issues)
+*   [GitHub Avalonia 议题](https://github.com/AvaloniaUI/Avalonia/issues)
 *   [StackOverflow](https://stackoverflow.com/)
 *   [Discord DotNetEvolution](https://discord.com/invite/HSuhTyG)
 
 ### XAML
 
-不要关注代码隐藏部分；那将在 MVVM 部分中讨论。你需要学习的是 XAML 语言以及创建样式和资源。练习创建一些不执行任何操作的优秀 UI。
+目前暂时不用关注代码绑定部分，这将在 MVVM 章节介绍。你需要先学习 'XAML' 语言，并掌握如何创建样式和资源。可以先尝试设计一些漂亮的 UI，而不涉及任何逻辑。
 
-一个限制是你没有可视化编辑器，只能获得可视化预览。这迫使你手动编写所有 XAML。正如我所发现的，这是一件好事。我的 WPF 代码都是使用绝对坐标和大边距来定位控件的。这不是布局应该采用的方式。 `StackPanel` 是布局的最佳伙伴，所以请使用它来代替。
+一个限制是，Avalonia 并没有可视化编辑器，只有 XAML 预览功能，因此你需要手写所有 XAML 代码。但这实际上是一个优势。我最初在 'WPF' 中编写 'UI' 时，都是通过绝对坐标和大量的 Margin 来定位控件，而这并不是正确的做法。布局应更多依赖 'StackPanel'。
 
-同时使用 `Grid` 与行和列。边距应仅用于控制控件之间的间距，而不是用于在窗口中定位控件。
+此外，还应使用 Grid 来定义行和列。Margin 仅用于控制控件之间的间距，而不应该用于确定控件在窗口中的位置。
 
 <Grid Margin="10,6,10,10" ColumnDefinitions="150,*" RowDefinitions="*,40">
 
-
-使用 StackPanel 和网格重写自动生成的 WPF 代码，您将获得更简洁的代码。
+你可以尝试将自动生成的 'WPF' 代码改写成 'StackPanel' 和 'Grid' 结构，这样会让代码更加清晰。
 
 ### FluentAvalonia
 
-FluentAvalonia 提供了更好的样式和更多控件，因此您可能也想使用它。Avalonia 中没有内置的 MessageBox，而 FluentAvalonia 提供了这一功能。
+[FluentAvalonia](https://github.com/amwx/FluentAvalonia) 提供了更美观的样式和更多控件，你可能会希望使用它。'Avalonia' 没有内置 'MessageBox'，而 'FluentAvalonia' 提供了这一功能。
 
-下载他们的源代码并运行示例应用程序，以查看所有控件的实际效果。示例应用程序还允许您浏览所有样式资源和活动颜色，因此是一个非常实用的工具。
+你可以下载 FluentAvalonia 的源代码并运行示例应用，以查看所有控件的实际效果。该示例应用还允许你浏览所有的样式资源和当前的颜色方案，因此是一个非常有用的工具。
 
-### 图标
+### 图标处理
 
-Svg.Skia 是 SVG 图标的一个选项；但它无法动态调整图标颜色。
+[Svg.Skia](https://github.com/wieslawsoltes/Svg.Skia) 可以用于处理 SVG 图标，但它无法动态调整图标颜色。
 
-FluentAvalonia 为 `SymbolIcon` 提供了内置图标，满足您的大部分需求。下载其源代码并运行示例应用程序以查看它们。
+FluentAvalonia 提供了 `SymbolIcon`，其中包含了大多数常见的图标。你可以下载 FluentAvalonia 的源代码并运行示例应用来查看所有可用图标。
 
+```xaml
 <flu:SymbolIcon Symbol="Add" FontSize="20" />
+```
 
+如果 `SymbolIcon` 中没有你需要的图标，可以将 SVG 转换为 `Path`，但这可能较为复杂。此外，`Path` 需要手动指定 `Brush`，因此不会自动适配按钮的前景色。
 
-如果你需要的图标不在 SymbolIcon 中，有一种方法可以将 SVG 转换为 Path，但这可能会变得复杂，而且 Path 要求你设置固定的 Brush，因此它不会适应按钮的 Forecolor。
+我个人更倾向于创建一个包含自定义图标的字体。
 
-我发现创建一个包含自定义图标的字体更容易。
+[这里有一篇关于使用 FontForge 创建图标字体的简单指南](https://mohammedraji.github.io/posts/The-Definitive-guide-to-create-an-icon-font/)。
 
-[以下是使用 FontForge 创建图标字体的简单指南。](https://mohammedraji.github.io/posts/The-Definitive-guide-to-create-an-icon-font/)
-
-我的按钮看起来像这样
-
+我的按钮代码如下：
+```c#
 <Button Classes="icon" Width="35" Content="I" />
+```
 
-
-使用 `icon` 定义为
-
+`icon` 样式定义如下：
+```xaml
 <Style Selector="Button.icon">
-<Setter Property="FontFamily" Value="avares://Common.Avalonia.App/Styles/Icons.otf#" />
-<Setter Property="FontSize" Value="17" />
+    <Setter Property="FontFamily" Value="avares://Common.Avalonia.App/Styles/Icons.otf#" />
+    <Setter Property="FontSize" Value="17" />
 </Style>
-
+```
 
 ### 示例代码
 
-以下是一些使用这些原则创建的示例视图。我已在 App.xaml 中注册了自定义样式和资源。
+[这里有一些基于这些原则创建的示例 View](https://github.com/mysteryx93/HanumanInstituteApps/tree/master/Src/App.Converter432Hz/Converter432Hz/Views)。  
+我创建了一些自定义[样式](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/Apps/Styles/CommonStyles.axaml)和[资源](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/Apps/Styles/CommonResources.axaml)，并在 [App.xaml](https://github.com/mysteryx93/HanumanInstituteApps/blob/master/Src/App.Converter432Hz/Converter432Hz/App.axaml) 中注册它们。
 
-该应用随后与可即时设置的浅色和深色主题完美配合。这些样式添加了背景渐变，将按钮样式更改为类似 FluentAvalonia 的“强调”风格，并带有 35%的不透明度，调整了 ListBox 使得双击覆盖整个项目区域，并根据我的需求调整了一些细节。
+应用程序支持动态切换明暗主题。样式中添加了背景渐变，使按钮样式类似 FluentAvalonia 的“强调”风格（不透明度 35%），修改了 `ListBox` 以便双击时整个项都可交互，并调整了一些 UI 细节。
 
 ### 可视化调试
 
-设置和更改样式可能很困难，因为您不知道控件内部是如何构建的。
+调整样式可能较为困难，因为你无法直接看到控件的内部结构。
 
-首先，运行你的应用程序并按下 F12 以打开 Avalonia DevTools。将工具窗口放在屏幕右侧，你的应用程序放在左侧。点击 Visual Tree 选项卡，将鼠标悬停在你想要分析的控件上，然后按下 CTRL+SHIFT。它将在可视化树中浏览到该元素，你可以看到哪些属性正在生效。
+首先，运行应用程序并按 `F12` 打开 Avalonia DevTools。将工具窗口放在屏幕右侧，应用程序界面放在左侧。点击“可视化树”选项卡，鼠标悬停在你想分析的控件上，然后按 `CTRL+SHIFT`，即可在可视化树中定位该元素，并查看其生效的属性。
 
-此外，您可以浏览源样式，如果使用内置样式，则为 Avalonia.Themes.Fluent，或者 FluentAvalonia。
+你还可以浏览源代码：
+- 如果使用内置样式，可以参考 [Avalonia.Themes.Fluent](https://github.com/AvaloniaUI/Avalonia/tree/master/src/Avalonia.Themes.Fluent)
+- 如果使用 FluentAvalonia，可以参考 [FluentAvalonia 样式库](https://github.com/amwx/FluentAvalonia/tree/master/src/FluentAvalonia/Styling)
 
-### Code-Behind
+### 代码绑定
 
-最后，这是我的代码隐藏文件的样子。我想保持这种方式。你可能会好奇我是如何实现一个完全没有代码隐藏文件的全功能应用的。我稍后会讲到这一点。
+最终，我的代码绑定方式如下。我希望保持这种风格。你可能会疑惑我是如何做到完全无代码绑定的，稍后会介绍这一点。
 
+```c#
 public partial class MainView : CommonWindow<MainViewModel>
 {
-protected override void Initialize() => AvaloniaXamlLoader.Load(this);
+    protected override void Initialize() => AvaloniaXamlLoader.Load(this);
 }
+```
 
+在 XAML 中，`d` 前缀用于设置设计时属性，例如：
 
-在 XAML 中，'d' 前缀允许设置设计时属性。这允许为设计器设置 DataContext。我们将在下一节中创建 ViewModelLocator 类。
-
+```xaml
 d:DataContext="{x:Static local:ViewModelLocator.Main}"
-
+```
 
 ### 创建您的项目
 
