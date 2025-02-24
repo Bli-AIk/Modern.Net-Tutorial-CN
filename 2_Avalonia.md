@@ -11,8 +11,7 @@
 [9. 程序集裁剪](9_AssemblyTrimming.md)  
 [10. 多环境支持](10_MultipleEnvironments.md)  
 
-2. Avalonia UI
----------------
+## 2. Avalonia UI
 
 Avalonia 是一个类似现代 WPF 的 UI，适用于所有操作系统：Windows、Linux、MacOS、iOS、Android 甚至 Web Assembly！它已经足够成熟，可用于商业用途。
 
