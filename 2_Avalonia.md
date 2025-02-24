@@ -1,3 +1,5 @@
+[原文](https://github.com/mysteryx93/Modern.Net-Tutorial/blob/main/2_Avalonia.md)
+
 # 教程：使用 .NET 构建现代跨平台应用
 
 [1. 引言](README.md)  
@@ -167,5 +169,5 @@ return;
 ```
 
 
-[\> 下一步：依赖注入](3_DependencyInjection.md)
+[\> 下一章：依赖注入](3_DependencyInjection.md)
 
