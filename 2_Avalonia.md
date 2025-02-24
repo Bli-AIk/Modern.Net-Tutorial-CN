@@ -15,7 +15,7 @@
 
 Avalonia 是一个类似现代 WPF 的 UI，适用于所有操作系统：Windows、Linux、MacOS、iOS、Android 甚至 Web Assembly！它已经足够成熟，可用于商业用途。
 
-首先，在您的 IDE 中安装插件。说明在此。
+首先，在您的 IDE 中[安装插件](https://docs.avaloniaui.net/docs/next/get-started/set-up-an-editor)。
 
 ### 资源
 
